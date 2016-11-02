@@ -16,8 +16,14 @@ class MyTestCase(unittest.TestCase):
     def test_unsuccessful_return_code(self):
         self.assertEqual(1, self.uut.system_call(["ls", "cheese_monkey"], True))
 
-    # def test_unsuccessful_return_code(self):
-    #     self.assertEqual(1, self.uut.os_system_call("/bin/sh true"))
+    def test_successful_return_code_os_system(self):
+        self.assertEqual(0, self.uut.os_system_call("true"))
+
+    def test_unsuccessful_return_code_os_system(self):
+        self.assertNotEqual(0, self.uut.os_system_call("false"))
+
+    def test_successful_return_stdout(self):
+        self.assertEqual("foo", self.uut.subprocess_call("echo foo", shell=True, stdout=self.uut.subprocess.PIPE).stdout.read())
 
 if __name__ == '__main__':
     unittest.main()

@@ -10,3 +10,7 @@ class SystemCaller:
 
     def os_system_call(self, command):
         return os.system(command)
+
+    def subprocess_call(self, command):
+        subprocess.Popen(command)
+        return "foo"

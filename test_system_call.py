@@ -22,11 +22,9 @@ class MyTestCase(unittest.TestCase):
     def test_unsuccessful_return_code_os_system(self):
         self.assertNotEqual(0, self.uut.os_system_call("false"))
 
-    # def test_successful_return_stdout(self):
-    #     self.assertEqual("foo", self.uut.subprocess_call("echo foo", shell=True, stdout=self.uut.subprocess.PIPE).stdout.read())
-
     def test_successful_os_popen(self):
-        self.uut.os_popen_call()
+        output = self.uut.subprocess_check_output_call("ls -al")
+        self.assertEqual(True, output.startswith('total'))
 
 if __name__ == '__main__':
     unittest.main()

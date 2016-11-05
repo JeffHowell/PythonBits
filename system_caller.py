@@ -1,5 +1,5 @@
 # from subprocess import call
-import subprocess
+import shlex, subprocess
 import os
 
 
@@ -11,9 +11,13 @@ class SystemCaller:
     def os_system_call(self, command):
         return os.system(command)
 
-    def os_popen_call(self, command):
-        proc = subprocess.Popen(shell=True)
-        proc.communicate()
+    def subprocess_check_output_call(self, command):
+        result = subprocess.check_output(shlex.split(command))
+        # result = subp.returncode
+
+        return result
+        # proc = subprocess.Popen(shlex.split(command))
+        # proc.communicate()
 
     def subprocess_call(self, command):
         subprocess.Popen(command)
